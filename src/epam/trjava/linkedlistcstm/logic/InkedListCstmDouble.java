@@ -1,5 +1,5 @@
 package epam.trjava.linkedlistcstm.logic;
 
-public class LinkedListCstm {
+public class InkedListCstmDouble {
 
 }
