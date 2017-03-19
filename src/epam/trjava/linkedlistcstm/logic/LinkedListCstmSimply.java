@@ -1,6 +1,6 @@
 package epam.trjava.linkedlistcstm.logic;
 
-public class LinkedListCstmSingle {
+public class LinkedListCstmSimply {
 
 	private int size = 0;
 
@@ -9,30 +9,33 @@ public class LinkedListCstmSingle {
 	private Entry _tail;
 
 	// Empty constructor
-	public LinkedListCstmSingle() {
+	public LinkedListCstmSimply() {
 	}
 
-	private void printList(Entry entry) {
-		while (entry != null) {
-			System.out.println(entry.element);
-			entry = entry.next;
+	public void printListValues() {
+		Entry temp = new Entry();
+		temp = _head;
+		while (temp != null) {
+			System.out.println(temp.element);
+			temp = temp.next;
 		}
 	}
 
-	// Add node in the list
+	// add node in the list
+	/*
+	 * 1: create Entry with node 
+	 * 2: find the last node 
+	 * 3: set next field
+	 * of last node on created node
+	 */
 	public void add(Object value) {
 
-		/*
-		 * 1: create Entry with node 
-		 * 2: find the last node 
-		 * 3: set next field
-		 * of last node on created node
-		 */
+		//step 1
+		Entry node = new Entry();
+		node.element = value;
+		node.next = null;
 
-		//1 step
-		Entry node = new Entry(value, null);
-
-		//2 and 3 steps: if this node is the first
+		//steps 2 and 3 steps: if this node is the first
 		if (null == _head) {
 			_head = node;
 			_tail = node;
@@ -42,30 +45,30 @@ public class LinkedListCstmSingle {
 			_tail.next = node;
 			_tail = node;
 		}
-		printList(node);
 		size++;
 	}
 
+
+	//Remove node from the list
+	 /* 
+	  * 1: List is empty, do nothing;
+	  * 2: One removable node, set previous = null
+	  * 3: some of removable nodes:
+	  * 3a: removable node is the first;
+	  * 3b: removable node in the middle or in the end of the list.
+   */   
 	public boolean remove(Object value) {
-		
-		 /* 
-		  * 1: List is empty, do nothing;
-		  * 2: One removable node, set previous = null
-		  * 3: some of removable nodes:
-		  * 3a: removable node is the first;
-		  * 3b: removable node in the middle or in the end of the list.
-	    */   
 		
 		Entry previous = null;
 		Entry current = _head;
 
-		//1: _head check if list is empty
+		//step 1: _head check if list is empty
 		while (null != current) {
 
 			// Removable node in the list
 			if (current.element.equals(value)) {
 
-				// 3b: Removable node in the middle or in the end
+				//step 3b: Removable node in the middle or in the end
 				if (previous != null) {
 
 					// Removable node in the middle of the list
@@ -77,7 +80,7 @@ public class LinkedListCstmSingle {
 					}
 				} else {
 
-					//2 or 3a: One element (previous = null) or removable node is first
+					//step 2 or 3a: One element (previous = null) or removable node is first
 					_head = _head.next;
 
 					// List is empty now?
@@ -94,7 +97,7 @@ public class LinkedListCstmSingle {
 		return false;
 	}
 	
-	public void celar(){
+	public void clear(){
 		_head = null;
 		_tail = null;
 		size = 0;
@@ -117,15 +120,12 @@ public class LinkedListCstmSingle {
 		return size;
 	}
 
-	// Class of node for adding and removing
+	// Class of node (special entity) for adding and removing
 	private static class Entry<E> {
 		E element;
 		Entry<E> next;
 
-		Entry(E element, Entry<E> next) {
-			this.element = element;
-			this.next = next;
-		}
+		Entry() {}
 	}
 
 }
