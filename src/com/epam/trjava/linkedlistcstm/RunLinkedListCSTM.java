@@ -1,7 +1,7 @@
-package epam.trjava.linkedlistcstm;
+package com.epam.trjava.linkedlistcstm;
 
-import epam.trjava.linkedlistcstm.logic.LinkedListCstmDoubly;
-import epam.trjava.linkedlistcstm.logic.LinkedListCstmSimply;
+import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmDoubly;
+import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmSimply;
 
 public class RunLinkedListCSTM {
 

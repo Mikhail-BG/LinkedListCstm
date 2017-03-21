@@ -1,4 +1,4 @@
-package epam.trjava.linkedlistcstm.logic;
+package com.epam.trjava.linkedlistcstm.logic;
 
 public class LinkedListCstmSimply {
 
