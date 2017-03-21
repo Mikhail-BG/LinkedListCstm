@@ -1,127 +1,150 @@
 package com.epam.trjava.linkedlistcstm.logic;
 
+/**
+ * Class creates Doubly LinkedList
+ * 
+ * @autor Mikhail Bahatyrou
+ * @version 1.0
+ */
 public class LinkedListCstmDoubly {
 
+	/** Number of elements in LinkedList */
 	private int size = 0;
 
-	// the first and the last nodes of Linked list
-	private Entry _head;
-	private Entry _tail;
+	/** The first element of LinkedList */
+	private Entry head;
 
-	// Empty constructor
+	/** The last element of LinkedList */
+	private Entry tail;
+
+	/** Empty constructor */
 	public LinkedListCstmDoubly() {
 	}
 
+	/**
+	 * Method for printing elements of LinkedList
+	 */
 	public void printListValues() {
 		Entry temp = new Entry();
-		temp = _head;
+		temp = head;
 		while (temp != null) {
 			System.out.println(temp.element);
 			temp = temp.next;
 		}
 	}
 
-	// addFirst method
-	/*
-	 * 1: set next field into new node linked to previous first node 
-	 * 2: set prev field into previous first node linked to new node 
-	 * 3: refresh _tail if needed and increment size
+	/**
+	 * Method adds the first node into LinkedList Mission: step 1: set next
+	 * field into the new node linked to previous first node; step 2: set prev
+	 * field into previous first node linked to new node; step 3: refresh tail
+	 * if needed and increment size;
+	 * 
+	 * @param value
+	 *            Object to add in LinkedList
+	 * @deprecated Here we add nodes in the end of LinkedList
 	 */
+
 	public void addFirst(Object value) {
 
 		Entry node = new Entry();
 		node.element = value;
 
-		Entry temp = _head;
+		Entry temp = head;
 
 		// step 1
-		_head = node;
-		_head.next = temp;
+		head = node;
+		head.next = temp;
 
-		if (0 == size) {
-			// step 3
-			_tail = _head;
+		if (0 == size) { // step 3
+			tail = head;
 		} else {
 			// step 2
-			temp.prev = _head;
-		}
-		// step 3
+			temp.prev = head;
+		} // step 3
 		size++;
 	}
 
-	// addLast method node into list
-	/*
-	 * Necessary to create new node and refresh _head and _tail
+	/**
+	 * Method adds the last node into LinkedList. Mission: necessary to create
+	 * new node and refresh head and tail
+	 * 
+	 * @param value
+	 *            Object to add in LinkedList
 	 */
 	public void addLast(Object value) {
 		Entry node = new Entry();
 		node.element = value;
 
 		if (0 == size) {
-			_head = node;
+			head = node;
 		} else {
-			_tail.next = node;
-			node.prev = _tail;
+			tail.next = node;
+			node.prev = tail;
 		}
 
-		_tail = node;
+		tail = node;
 		size++;
 	}
 
-	// add node in the list
-	/*
-	 * 1: create Entry with node 
-	 * 2: find the last node 
-	 * 3: set next field of last node on created node
+	/**
+	 * Method adds node in the end of LinkedList
+	 * 
+	 * @param value
+	 *            Object to add in LinkedList
 	 */
 	public void add(Object value) {
 		addLast(value);
 	}
 
-	// removeFirst method removes the first node from the list. If the list is
-	// empty - do nothing.
+	/**
+	 * Method removes the first node of LinkedList If the list is empty - do
+	 * nothing.
+	 */
 	public void removeFirst() {
 		if (0 != size) {
-			_head = _head.next;
+			head = head.next;
 			size--;
 		}
 		if (size == 0) {
-			_tail = null;
+			tail = null;
 		} else {
-			_head.prev = null;
+			head.prev = null;
 		}
 	}
 
-	// removeLast method remove the last node of the list. If the list is empty,
-	// - do nothing.
+	/**
+	 * Method removes the last node of LinkedList If the list is empty - do
+	 * nothing.
+	 */
 	public void removeLast() {
 		if (0 == size) {
 			if (1 == size) {
-				_head = null;
-				_tail = null;
+				head = null;
+				tail = null;
 			} else {
-				_tail.prev.next = null;
-				_tail = _tail.prev;
+				tail.prev.next = null;
+				tail = tail.prev;
 			}
 			size--;
 		}
 	}
 
-	// remove(value) - removes the first element with value, return true if
-	// deleted, and false if not.
-	/*
-	 * 1: List is empty, do nothing; 
-	 * 2: One removable node, set previous = null
-	 * 3: some of removable nodes: 
-	 * 3a: removable node is the first; 
-	 * 3b: removable node in the middle or in the end of the list.
+	/**
+	 * Method removes the node by the value from LinkedList. Mission: 1: List is
+	 * empty, do nothing; 2: One removable node, set previous = null 3: some of
+	 * removable nodes: 3a: removable node is the first; 3b: removable node in
+	 * the middle or in the end of the list.
+	 * 
+	 * @param value
+	 *            Object to remove from LinkedList
+	 * @return true if node was removed, and false if not.
 	 */
 	public boolean remove(Object value) {
 
 		Entry previous = null;
-		Entry current = _head;
+		Entry current = head;
 
-		// step 1: _head check if list is empty
+		// step 1: head check if list is empty
 		while (null != current) {
 
 			// Removable node in the list
@@ -133,9 +156,9 @@ public class LinkedListCstmDoubly {
 					// Removable node in the middle of the list
 					previous.next = current.next;
 
-					// Removable node in the end of list (change _tail)
+					// Removable node in the end of list (change tail)
 					if (null == current.next) {
-						_tail = previous;
+						tail = previous;
 					} else {
 
 						// step 2 or 3a: One element (previous = null) or
@@ -156,14 +179,24 @@ public class LinkedListCstmDoubly {
 		return false;
 	}
 
+	/**
+	 * Method clears LinkedList
+	 */
 	public void clear() {
-		_head = null;
-		_tail = null;
+		head = null;
+		tail = null;
 		size = 0;
 	}
 
+	/**
+	 * Method checks if LinkedList contains the value
+	 * 
+	 * @param value
+	 *            Object for checking
+	 * @return true if LinkedList contains, false if not
+	 */
 	public boolean contains(Object value) {
-		Entry current = _head;
+		Entry current = head;
 
 		while (null != current) {
 			if (current.element.equals(value)) {
@@ -174,19 +207,24 @@ public class LinkedListCstmDoubly {
 
 		return false;
 	}
-
+	
+	/**
+	 * Method return the size of LinkedList
+	 * 
+	 * @return number of elements
+	 */
 	public int size() {
 		return size;
 	}
 
-	// Class of node (special entity) for adding and removing
+	/**
+	 * Class of node (special entity) for adding and removing into LinkedList
+	 */
 	private static class Entry<E> {
 		E element;
 		Entry<E> next;
 		Entry<E> prev;
 
-		Entry() {
-		}
+		Entry() {}
 	}
-
 }
