@@ -33,7 +33,6 @@ public class LinkedListCstmAnyAdd {
 		if(size == 0){
 			tail = head;
 		}
-		size++;
 	}
 
 	/**
@@ -46,13 +45,14 @@ public class LinkedListCstmAnyAdd {
 		} else {
 			insertNode(value, (size));
 		}
-		size++;
 	}
 	
 	public void addMiddle(Object value){
 		if(0 == size){
-			addLast(value);
-		} else insertNode(value, (size / 2));
+			addFirst(value);
+		} else {
+			insertNode(value, (size / 2));
+		}
 	}
 	
 	private void insertNode(Object value, int startIndex){
@@ -67,8 +67,6 @@ public class LinkedListCstmAnyAdd {
 			head = node;
 		}
 		
-		increaseIndexForEach(node.next);
-		
 		while(null != current){
 			
 			//set next node for the node before added node
@@ -77,29 +75,17 @@ public class LinkedListCstmAnyAdd {
 				node.next = current.next;
 				current.next = node;
 			}
-			
-			/*
-			//index increase for each element after added
-			if(current.index >= startIndex){
-				current.index++;
-			}
-			*/
 			tail = current;
 			current = current.next;
 		}
-		
-		/*
-		if(startIndex != 0) {
-			node.index = node.index - 1;
-		} 
-		*/
+		increaseIndexForEach(node.next);
+		size++;
 	}
 	
-	private void increaseIndexForEach(Entry startEntry){
-		Entry current = startEntry;
-		while(null != current){
-			current.index++;
-			current = current.next;
+	private void increaseIndexForEach(Entry<Object> startEntry){
+		while(null != startEntry){
+			startEntry.index++;
+			startEntry = startEntry.next;
 		}
 	}
 
