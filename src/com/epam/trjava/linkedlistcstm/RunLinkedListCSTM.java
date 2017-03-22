@@ -1,13 +1,15 @@
 package com.epam.trjava.linkedlistcstm;
 
+import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAnyAdd;
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmDoubly;
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmSimply;
 
 public class RunLinkedListCSTM {
 
 	public static void main(String[] args) {
-		linkedListSingle();
-		linkedListDouble();
+		//linkedListSingle();
+		//linkedListDouble();
+		linkedListAnyAdd();
 	}
 	
 	public static void linkedListSingle(){
@@ -43,6 +45,30 @@ public class RunLinkedListCSTM {
 		myList.clear();
 		System.out.println(myList.contains("B"));
 		System.out.println("Size = " + myList.size());
+	}
+	
+	public static void linkedListAnyAdd(){
+		System.out.println("----Any add----");
+		LinkedListCstmAnyAdd myList = new LinkedListCstmAnyAdd();
+		myList.addFirst("AA");
+		myList.printListValues();
+		myList.addLast("A");
+		myList.printListValues();
+		myList.addLast("B");
+		myList.printListValues();
+		myList.addFirst("AB");
+		myList.printListValues();
+		myList.addLast("C");
+		myList.printListValues();
+		myList.addFirst("AC");
+		myList.printListValues();
+		myList.addLast("D");
+		myList.printListValues();
+		myList.addMiddle("AAA");
+		myList.printListValues();
+		myList.addMiddle("BBB");
+		System.out.println("--- end ---");
+		myList.printListValues();
 	}
 
 }

@@ -157,7 +157,6 @@ public class LinkedListCstmSimply {
 		E element;
 		Entry<E> next;
 
-		Entry() {
-		}
+		Entry() {}
 	}
 }
