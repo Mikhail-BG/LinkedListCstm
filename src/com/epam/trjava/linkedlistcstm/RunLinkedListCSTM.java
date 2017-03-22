@@ -67,6 +67,7 @@ public class RunLinkedListCSTM {
 		myList.addMiddle("AAA");
 		myList.printListValues();
 		myList.addMiddle("BBB");
+		myList.remove("AA");
 		System.out.println("--- end ---");
 		myList.printListValues();
 	}

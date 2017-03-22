@@ -43,7 +43,7 @@ public class LinkedListCstmAnyAdd {
 		if(0 == size){
 			addFirst(value);
 		} else {
-			insertNode(value, (size));
+			insertNode(value, size);
 		}
 	}
 	
@@ -109,7 +109,8 @@ public class LinkedListCstmAnyAdd {
 
 			// Removable node is in the LinkedList
 			if (current.element.equals(value)) {
-
+				
+				decreaseIndexForEach(current);
 				// step 3b: Removable node is in the middle or in the end of
 				// LinkedList
 				if (previous != null) {
@@ -139,6 +140,13 @@ public class LinkedListCstmAnyAdd {
 			current = current.next;
 		}
 		return false;
+	}
+	
+	private void decreaseIndexForEach(Entry<Object> startEntry){
+		while(null != startEntry){
+			startEntry.index--;
+			startEntry = startEntry.next;
+		}
 	}
 
 	/**
