@@ -1,5 +1,6 @@
 package com.epam.trjava.linkedlistcstm;
 
+import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAddPos;
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAnyAdd;
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmDoubly;
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmSimply;
@@ -9,7 +10,17 @@ public class RunLinkedListCSTM {
 	public static void main(String[] args) {
 		//linkedListSingle();
 		//linkedListDouble();
-		linkedListAnyAdd();
+		//linkedListAnyAdd();
+		linkedListAnyPosition();
+	}
+	
+	public static void linkedListAnyPosition(){
+		LinkedListCstmAddPos<String> myList = new LinkedListCstmAddPos<String>();
+		
+		myList.addFirst("A");
+		myList.addFirst("B");
+		myList.addLast("C");
+		myList.printListValues();
 	}
 	
 	public static void linkedListSingle(){
@@ -49,7 +60,7 @@ public class RunLinkedListCSTM {
 	
 	public static void linkedListAnyAdd(){
 		System.out.println("----Any add----");
-		LinkedListCstmAnyAdd myList = new LinkedListCstmAnyAdd();
+		LinkedListCstmAnyAdd<String> myList = new LinkedListCstmAnyAdd<String>();
 		myList.addFirst("AA");
 		myList.printListValues();
 		myList.addLast("A");
@@ -70,6 +81,8 @@ public class RunLinkedListCSTM {
 		myList.remove("AA");
 		System.out.println("--- end ---");
 		myList.printListValues();
+		
+		
 	}
 
 }

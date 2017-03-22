@@ -1,14 +1,14 @@
 package com.epam.trjava.linkedlistcstm.logic;
 
-public class LinkedListCstmAnyAdd {
+public class LinkedListCstmAnyAdd<E> {
 	/** Number of elements in LinkedList */
 	private int size = 0;
 
 	/** The first element of LinkedList */
-	private Entry head;
+	private Entry<E> head;
 
 	/** The last element of LinkedList */
-	private Entry tail;
+	private Entry<E> tail;
 
 	/** Empty constructor */
 	public LinkedListCstmAnyAdd() {
@@ -18,7 +18,7 @@ public class LinkedListCstmAnyAdd {
 	 * Method for printing elements of LinkedList
 	 */
 	public void printListValues() {
-		Entry temp = new Entry();
+		Entry<E> temp = new Entry<E>();
 		temp = head;
 		while (temp != null) {
 			System.out.println(temp.element + " @ " + temp.index);
@@ -27,7 +27,7 @@ public class LinkedListCstmAnyAdd {
 		System.out.println("----");
 	}
 	
-	public void addFirst(Object value){
+	public void addFirst(E value){
 		insertNode(value, 0);
 		//the very first element
 		if(size == 0){
@@ -39,7 +39,7 @@ public class LinkedListCstmAnyAdd {
 	 * @param value
 	 *            Object to add in LinkedList
 	 */
-	public void addLast(Object value) {
+	public void addLast(E value) {
 		if(0 == size){
 			addFirst(value);
 		} else {
@@ -47,7 +47,7 @@ public class LinkedListCstmAnyAdd {
 		}
 	}
 	
-	public void addMiddle(Object value){
+	public void addMiddle(E value){
 		if(0 == size){
 			addFirst(value);
 		} else {
@@ -55,12 +55,12 @@ public class LinkedListCstmAnyAdd {
 		}
 	}
 	
-	private void insertNode(Object value, int startIndex){
-		Entry node = new Entry();
+	private void insertNode(E value, int startIndex){
+		Entry<E> node = new Entry<E>();
 		node.element = value;
 		node.index = startIndex;
 		
-		Entry current = head;
+		Entry<E> current = head;
 		
 		if (startIndex == 0) {
 			node.next = head;
@@ -82,10 +82,10 @@ public class LinkedListCstmAnyAdd {
 		size++;
 	}
 	
-	private void increaseIndexForEach(Entry<Object> startEntry){
-		while(null != startEntry){
-			startEntry.index++;
-			startEntry = startEntry.next;
+	private void increaseIndexForEach(LinkedListCstmAnyAdd<E>.Entry<E> next){
+		while(null != next){
+			next.index++;
+			next = next.next;
 		}
 	}
 
@@ -98,12 +98,12 @@ public class LinkedListCstmAnyAdd {
 	 * @param value
 	 *            Object to remove from LinkedList
 	 */
-	public boolean remove(Object value) {
+	public boolean remove(E value) {
 
-		Entry previous = null;
+		Entry<E> previous = null;
 
 		// step 1: head check if LinkedList is empty
-		Entry current = head;
+		Entry<E> current = head;
 
 		while (null != current) {
 
@@ -142,10 +142,10 @@ public class LinkedListCstmAnyAdd {
 		return false;
 	}
 	
-	private void decreaseIndexForEach(Entry<Object> startEntry){
-		while(null != startEntry){
-			startEntry.index--;
-			startEntry = startEntry.next;
+	private void decreaseIndexForEach(LinkedListCstmAnyAdd<E>.Entry<E> current){
+		while(null != current){
+			current.index--;
+			current = current.next;
 		}
 	}
 
@@ -189,7 +189,7 @@ public class LinkedListCstmAnyAdd {
 	/**
 	 * Class of node (special entity) for adding and removing into LinkedList
 	 */
-	private static class Entry<E> {
+	private class Entry<E> {
 		E element;
 		Entry<E> next;
 		int index;
