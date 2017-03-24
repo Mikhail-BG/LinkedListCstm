@@ -79,10 +79,10 @@ public class LinkedListCstmAddPos<E> {
 		}
 		
 		//middle element before tail
-		if(current_index == size - 2){
-			node.next = null;
-			tail.next = node;
-			tail = node;
+		if(current_index == 1 && size == 3){
+			node.next = tail;
+			head.next = node;
+			tail.next = null;
 			return;
 		}
 
