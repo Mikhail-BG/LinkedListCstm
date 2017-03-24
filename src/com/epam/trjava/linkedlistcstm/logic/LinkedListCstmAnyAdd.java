@@ -10,7 +10,6 @@ public class LinkedListCstmAnyAdd<E> {
 	/** The last element of LinkedList */
 	private Entry<E> tail;
 
-	/** Empty constructor */
 	public LinkedListCstmAnyAdd() {
 	}
 
@@ -24,7 +23,6 @@ public class LinkedListCstmAnyAdd<E> {
 			System.out.println(temp.element + " @ " + temp.index);
 			temp = temp.next;
 		}
-		System.out.println("----");
 	}
 	
 	public void addFirst(E value){
@@ -35,10 +33,6 @@ public class LinkedListCstmAnyAdd<E> {
 		}
 	}
 
-	/**
-	 * @param value
-	 *            Object to add in LinkedList
-	 */
 	public void addLast(E value) {
 		if(0 == size){
 			addFirst(value);

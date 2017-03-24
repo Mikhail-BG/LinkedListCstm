@@ -11,7 +11,7 @@ public class LinkedListCstmAddPos<E> {
 	/** The last element of LinkedList */
 	private Entry<E> tail;
 
-	private int p_index;
+	private int current_index;
 
 	private Entry<E> current;
 
@@ -21,7 +21,7 @@ public class LinkedListCstmAddPos<E> {
 	 * Method for printing elements of LinkedList
 	 */
 	public void printListValues() {
-		System.out.println("size = " + size);
+		
 		Entry<E> temp = new Entry<E>();
 		temp = head;
 		while (temp != null) {
@@ -43,7 +43,7 @@ public class LinkedListCstmAddPos<E> {
 			} else {
 				current = current.next;
 			}
-			this.p_index = i;
+			this.current_index = i;
 		}
 	}
 
@@ -51,24 +51,37 @@ public class LinkedListCstmAddPos<E> {
 		Entry<E> node = new Entry<E>();
 		node.element = value;
 
-		// set the first into LinkedList
-		if (p_index == 0) {
+		size++;
+		
+		//first iteration
+		if (current_index == 0 && size == 1){
+			node.next = null;
 			head = node;
-			node.next = current;
+			tail = node;
+			return;
+		}
+		
+		// set the first into LinkedList
+		if (current_index == 0 && size > 1) {
+			node.next = head;
+			head = node;
+			return;
 		}
 
 		// set the last into LinkedList
-		if (p_index == (size)) {
-			tail = node;
+		if (current_index == (size - 1) && size >= 1) {
 			node.next = null;
+			tail.next = node;
+			tail = node;
+			return;
 		}
 
 		// set node in the middle of LinkedList
-		if (0 < p_index & p_index <= (size - 1)) {
+		if (0 < current_index && current_index <= size) {
 			node.next = current.next;
 			current.next = node;
+			return;
 		}
-		size++;
 	}
 
 	public void addFirst(E value) {
@@ -77,8 +90,14 @@ public class LinkedListCstmAddPos<E> {
 	}
 
 	public void addLast(E value) {
-		setCurrentLocation(size - 1);
+		if(0 == size) {
+			setCurrentLocation(0);
+		} else setCurrentLocation(size);
 		insertAtLocation(value);
+	}
+	
+	public int getSize(){
+		return size;
 	}
 
 	/**
