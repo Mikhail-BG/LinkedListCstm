@@ -25,6 +25,11 @@ public class LinkedListCstmAnyAdd<E> {
 		}
 	}
 	
+	/**
+	 * Method adds element at first position of LinkedList
+	 * 
+	 * @param value - value of adding element
+	 */	
 	public void addFirst(E value){
 		insertNode(value, 0);
 		//the very first element
@@ -33,6 +38,11 @@ public class LinkedListCstmAnyAdd<E> {
 		}
 	}
 
+	/**
+	 * Method adds element at last position of LinkedList
+	 * 
+	 * @param value - value of adding element
+	 */	
 	public void addLast(E value) {
 		if(0 == size){
 			addFirst(value);
@@ -41,14 +51,30 @@ public class LinkedListCstmAnyAdd<E> {
 		}
 	}
 	
+	/**
+	 * Method adds element in the middle position of LinkedList
+	 * 
+	 * @param value - value of adding element
+	 */	
 	public void addMiddle(E value){
 		if(0 == size){
 			addFirst(value);
-		} else {
-			insertNode(value, (size / 2));
+			return;
+		} 
+		int i = size / 2;
+		if(i == size || 1 == size) {
+			addLast(value);
+			return;
 		}
+		insertNode(value, (size / 2));
 	}
 	
+	/**
+	 * Auxiliary method adds element in LinkedList according index
+	 * 
+	 * @param value - value of adding element
+	 * @param index - position of adding element
+	 */	
 	private void insertNode(E value, int startIndex){
 		Entry<E> node = new Entry<E>();
 		node.element = value;
@@ -76,6 +102,11 @@ public class LinkedListCstmAnyAdd<E> {
 		size++;
 	}
 	
+	/**
+	 * Auxiliary method rebuilds indexes when element added
+	 * 
+	 * @param next - starting element for index rebuilding
+	 */	
 	private void increaseIndexForEach(LinkedListCstmAnyAdd<E>.Entry<E> next){
 		while(null != next){
 			next.index++;
@@ -136,6 +167,11 @@ public class LinkedListCstmAnyAdd<E> {
 		return false;
 	}
 	
+	/**
+	 * Auxiliary method rebuilds indexes when element removed
+	 * 
+	 * @param next - starting element for index rebuilding
+	 */	
 	private void decreaseIndexForEach(LinkedListCstmAnyAdd<E>.Entry<E> current){
 		while(null != current){
 			current.index--;
@@ -159,8 +195,8 @@ public class LinkedListCstmAnyAdd<E> {
 	 *            Object for checking
 	 * @return true if LinkedList contains, false if not
 	 */
-	public boolean contains(Object value) {
-		Entry current = head;
+	public boolean contains(E value) {
+		Entry<E> current = head;
 
 		while (null != current) {
 			if (current.element.equals(value)) {
@@ -176,7 +212,7 @@ public class LinkedListCstmAnyAdd<E> {
 	 * 
 	 * @return number of elements
 	 */
-	public int size() {
+	public int getSize() {
 		return size;
 	}
 

@@ -11,8 +11,10 @@ public class LinkedListCstmAddPos<E> {
 	/** The last element of LinkedList */
 	private Entry<E> tail;
 
+	/** The internal class element, indicates location inside LinkedList */
 	private int current_index;
 
+	/** The internal class element, indicates Entry of current_index */
 	private Entry<E> current;
 
 	public LinkedListCstmAddPos() {}
@@ -75,9 +77,17 @@ public class LinkedListCstmAddPos<E> {
 			tail = node;
 			return;
 		}
+		
+		//middle element before tail
+		if(current_index == size - 2){
+			node.next = null;
+			tail.next = node;
+			tail = node;
+			return;
+		}
 
 		// set node in the middle of LinkedList
-		if (0 < current_index && current_index <= size) {
+		if (current_index <= size) {
 			node.next = current.next;
 			current.next = node;
 			return;
@@ -91,8 +101,23 @@ public class LinkedListCstmAddPos<E> {
 
 	public void addLast(E value) {
 		if(0 == size) {
-			setCurrentLocation(0);
+			addFirst(value);
+			return;
 		} else setCurrentLocation(size);
+		insertAtLocation(value);
+	}
+	
+	public void addMiddle(E value){
+		int i = size / 2;
+		if (0 == size){
+			addFirst(value);
+			return;
+		}
+		if (i == size || 1 == size){
+			addLast(value);
+			return;
+		}
+		setCurrentLocation(i);
 		insertAtLocation(value);
 	}
 	
