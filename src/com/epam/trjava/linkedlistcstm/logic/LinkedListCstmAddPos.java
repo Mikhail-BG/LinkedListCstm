@@ -124,6 +124,61 @@ public class LinkedListCstmAddPos<E> {
 	public int getSize(){
 		return size;
 	}
+	
+	public boolean remove(E value) {
+
+		Entry<E> previous = null;
+
+		// step 1: head check if LinkedList is empty
+		Entry<E> current = head;
+
+		while (null != current) {
+
+			// Removable node is in the LinkedList
+			if (current.element.equals(value)) {
+				
+				// step 3b: Removable node is in the middle or in the end of
+				// LinkedList
+				if (previous != null) {
+
+					// Removable node in the middle of the LinkedList
+					previous.next = current.next;
+
+					// Removable node in the end of LinkedList (change tail)
+					if (null == current.next) {
+						tail = previous;
+					}
+				} else {
+
+					// step 2 or 3a: One element in Linked List (previous =
+					// null) or removable node is first
+					head = head.next;
+
+					// List is empty now?
+					if (null == head) {
+						tail = null;
+					}
+				}
+				size--;
+				return true;
+			}
+			previous = current;
+			current = current.next;
+		}
+		return false;
+	}
+	
+	public boolean contains(E value) {
+		Entry<E> current = head;
+
+		while (null != current) {
+			if (current.element.equals(value)) {
+				return true;
+			}
+			current = current.next;
+		}
+		return false;
+	}
 
 	/**
 	 * Class of node (special entity) for adding and removing into LinkedList

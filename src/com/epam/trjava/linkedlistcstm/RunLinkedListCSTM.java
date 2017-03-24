@@ -97,7 +97,14 @@ public class RunLinkedListCSTM {
 		myList.addMiddle("D");
 		System.out.println("size = " + myList.getSize());
 		myList.printListValues();
-
+		System.out.println(myList.contains("B"));
+		myList.remove("A");
+		myList.remove("B");
+		myList.remove("C");
+		myList.remove("D");
+		myList.remove("E");
+		System.out.println("size = " + myList.getSize());
+		myList.printListValues();
 	}
 
 	public static void linkedListAnyAdd() {
