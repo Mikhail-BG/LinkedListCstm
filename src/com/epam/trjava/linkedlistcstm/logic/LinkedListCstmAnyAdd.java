@@ -1,5 +1,16 @@
 package com.epam.trjava.linkedlistcstm.logic;
 
+/**
+ * Class implements realization of Simply Linked List with the possibility to
+ * add element at first, at last positions and in the middle.
+ * 
+ * The idea: current position is defined by index. Index is a field of Entry
+ * entity. The method addMiddle inserts element in position: (size of LinkedList
+ * / 2)
+ * 
+ * @autor Mikhail Bahatyrou
+ * @version 1.0
+ */
 public class LinkedListCstmAnyAdd<E> {
 	/** Number of elements in LinkedList */
 	private int size = 0;
@@ -24,16 +35,17 @@ public class LinkedListCstmAnyAdd<E> {
 			temp = temp.next;
 		}
 	}
-	
+
 	/**
 	 * Method adds element at first position of LinkedList
 	 * 
-	 * @param value - value of adding element
-	 */	
-	public void addFirst(E value){
+	 * @param value
+	 *            - value of adding element
+	 */
+	public void addFirst(E value) {
 		insertNode(value, 0);
-		//the very first element
-		if(size == 0){
+		// the very first element
+		if (size == 0) {
 			tail = head;
 		}
 	}
@@ -41,57 +53,61 @@ public class LinkedListCstmAnyAdd<E> {
 	/**
 	 * Method adds element at last position of LinkedList
 	 * 
-	 * @param value - value of adding element
-	 */	
+	 * @param value
+	 *            - value of adding element
+	 */
 	public void addLast(E value) {
-		if(0 == size){
+		if (0 == size) {
 			addFirst(value);
 		} else {
 			insertNode(value, size);
 		}
 	}
-	
+
 	/**
 	 * Method adds element in the middle position of LinkedList
 	 * 
-	 * @param value - value of adding element
-	 */	
-	public void addMiddle(E value){
-		if(0 == size){
+	 * @param value
+	 *            - value of adding element
+	 */
+	public void addMiddle(E value) {
+		if (0 == size) {
 			addFirst(value);
 			return;
-		} 
+		}
 		int i = size / 2;
-		if(i == size || 1 == size) {
+		if (i == size || 1 == size) {
 			addLast(value);
 			return;
 		}
 		insertNode(value, (size / 2));
 	}
-	
+
 	/**
 	 * Auxiliary method adds element in LinkedList according index
 	 * 
-	 * @param value - value of adding element
-	 * @param index - position of adding element
-	 */	
-	private void insertNode(E value, int startIndex){
+	 * @param value
+	 *            - value of adding element
+	 * @param index
+	 *            - position of adding element
+	 */
+	private void insertNode(E value, int startIndex) {
 		Entry<E> node = new Entry<E>();
 		node.element = value;
 		node.index = startIndex;
-		
+
 		Entry<E> current = head;
-		
+
 		if (startIndex == 0) {
 			node.next = head;
 			head = node;
 		}
-		
-		while(null != current){
-			
-			//set next node for the node before added node
-			//set next for added node
-			if(current.index == (startIndex - 1)){
+
+		while (null != current) {
+
+			// set next node for the node before added node
+			// set next for added node
+			if (current.index == (startIndex - 1)) {
 				node.next = current.next;
 				current.next = node;
 			}
@@ -101,14 +117,15 @@ public class LinkedListCstmAnyAdd<E> {
 		increaseIndexForEach(node.next);
 		size++;
 	}
-	
+
 	/**
 	 * Auxiliary method rebuilds indexes when element added
 	 * 
-	 * @param next - starting element for index rebuilding
-	 */	
-	private void increaseIndexForEach(LinkedListCstmAnyAdd<E>.Entry<E> next){
-		while(null != next){
+	 * @param next
+	 *            - starting element for index rebuilding
+	 */
+	private void increaseIndexForEach(LinkedListCstmAnyAdd<E>.Entry<E> next) {
+		while (null != next) {
 			next.index++;
 			next = next.next;
 		}
@@ -134,7 +151,7 @@ public class LinkedListCstmAnyAdd<E> {
 
 			// Removable node is in the LinkedList
 			if (current.element.equals(value)) {
-				
+
 				decreaseIndexForEach(current);
 				// step 3b: Removable node is in the middle or in the end of
 				// LinkedList
@@ -166,14 +183,15 @@ public class LinkedListCstmAnyAdd<E> {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Auxiliary method rebuilds indexes when element removed
 	 * 
-	 * @param next - starting element for index rebuilding
-	 */	
-	private void decreaseIndexForEach(LinkedListCstmAnyAdd<E>.Entry<E> current){
-		while(null != current){
+	 * @param next
+	 *            - starting element for index rebuilding
+	 */
+	private void decreaseIndexForEach(LinkedListCstmAnyAdd<E>.Entry<E> current) {
+		while (null != current) {
 			current.index--;
 			current = current.next;
 		}
@@ -225,6 +243,7 @@ public class LinkedListCstmAnyAdd<E> {
 		Entry<E> next;
 		int index;
 
-		Entry() {}
+		Entry() {
+		}
 	}
 }
