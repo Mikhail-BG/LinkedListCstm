@@ -1,5 +1,17 @@
 package com.epam.trjava.linkedlistcstm.logic;
 
+/**
+ * Class implements realization of Simply Linked List with the possibility to
+ * add element at first, at last positions and in the middle.
+ * 
+ * The idea: define the current position inside LinkedList. Element adding
+ * implemented with methods addFirst, addLast and addMiddle. The method
+ * addMiddle inserts element in position: (size of LinkedList / 2)
+ * 
+ * @autor Mikhail Bahatyrou
+ * @version 1.0
+ */
+
 public class LinkedListCstmAddPos<E> {
 
 	/** Number of elements in LinkedList */
@@ -17,13 +29,14 @@ public class LinkedListCstmAddPos<E> {
 	/** The internal class element, indicates Entry of current_index */
 	private Entry<E> current;
 
-	public LinkedListCstmAddPos() {}
+	public LinkedListCstmAddPos() {
+	}
 
 	/**
 	 * Method for printing elements of LinkedList
 	 */
 	public void printListValues() {
-		
+
 		Entry<E> temp = new Entry<E>();
 		temp = head;
 		while (temp != null) {
@@ -33,6 +46,11 @@ public class LinkedListCstmAddPos<E> {
 		System.out.println("----");
 	}
 
+	/**
+	 * Auxiliary method defines current position and index into LinkedList,
+	 * method sets current_index and current as element after which will be
+	 * added new element
+	 */
 	private void setCurrentLocation(int index) {
 		if (index > size | index < 0) {
 			System.out.println("Exception: index out of bounds");
@@ -49,44 +67,51 @@ public class LinkedListCstmAddPos<E> {
 		}
 	}
 
+	/**
+	 * Auxiliary method inserts new element at position. It is possible 5
+	 * situations: 1 - set element on the first iteration when LinkedList is
+	 * created; 2 - set element at the first position; 3 - set element at the
+	 * last position; 4 - set element before the last position; 5 - set element
+	 * in the middle
+	 */
 	private void insertAtLocation(E value) {
 		Entry<E> node = new Entry<E>();
 		node.element = value;
 
 		size++;
-		
-		//first iteration
-		if (current_index == 0 && size == 1){
+
+		// 1. first iteration
+		if (current_index == 0 && size == 1) {
 			node.next = null;
 			head = node;
 			tail = node;
 			return;
 		}
-		
-		// set the first into LinkedList
+
+		// 2. set the first into LinkedList
 		if (current_index == 0 && size > 1) {
 			node.next = head;
 			head = node;
 			return;
 		}
 
-		// set the last into LinkedList
+		// 3. set the last into LinkedList
 		if (current_index == (size - 1) && size >= 1) {
 			node.next = null;
 			tail.next = node;
 			tail = node;
 			return;
 		}
-		
-		//middle element before tail
-		if(current_index == 1 && size == 3){
+
+		// 4. middle element before tail
+		if (current_index == 1 && size == 3) {
 			node.next = tail;
 			head.next = node;
 			tail.next = null;
 			return;
 		}
 
-		// set node in the middle of LinkedList
+		// 5 set node in the middle of LinkedList
 		if (current_index <= size) {
 			node.next = current.next;
 			current.next = node;
@@ -94,37 +119,63 @@ public class LinkedListCstmAddPos<E> {
 		}
 	}
 
+	/**
+	 * Method inserts element at the first position
+	 */
 	public void addFirst(E value) {
 		setCurrentLocation(0);
 		insertAtLocation(value);
 	}
 
+	/**
+	 * Method inserts element at the last position. If LinkedList is empty the
+	 * method addFirst works.
+	 */
 	public void addLast(E value) {
-		if(0 == size) {
+		if (0 == size) {
 			addFirst(value);
 			return;
-		} else setCurrentLocation(size);
+		} else
+			setCurrentLocation(size);
 		insertAtLocation(value);
 	}
-	
-	public void addMiddle(E value){
+
+	/**
+	 * Method inserts element at the middle. If LinkedList is empty the method
+	 * addFirst works. If this is the second iteration, addLast works.
+	 */
+	public void addMiddle(E value) {
 		int i = size / 2;
-		if (0 == size){
+		if (0 == size) {
 			addFirst(value);
 			return;
 		}
-		if (i == size || 1 == size){
+		if (i == size || 1 == size) {
 			addLast(value);
 			return;
 		}
 		setCurrentLocation(i);
 		insertAtLocation(value);
 	}
-	
-	public int getSize(){
+
+	/**
+	 * Method return the size of LinkedList
+	 * 
+	 * @return number of elements
+	 */
+	public int getSize() {
 		return size;
 	}
-	
+
+	/**
+	 * Method removes the node by the value from LinkedList. Mission: 1: List is
+	 * empty, do nothing; 2: One removable node, set previous = null 3: some of
+	 * removable nodes: 3a: removable node is the first; 3b: removable node in
+	 * the middle or in the end of the list.
+	 * 
+	 * @param value
+	 *            Object to remove from LinkedList
+	 */
 	public boolean remove(E value) {
 
 		Entry<E> previous = null;
@@ -136,7 +187,7 @@ public class LinkedListCstmAddPos<E> {
 
 			// Removable node is in the LinkedList
 			if (current.element.equals(value)) {
-				
+
 				// step 3b: Removable node is in the middle or in the end of
 				// LinkedList
 				if (previous != null) {
@@ -167,7 +218,14 @@ public class LinkedListCstmAddPos<E> {
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Method checks if LinkedList contains the value
+	 * 
+	 * @param value
+	 *            Object for checking
+	 * @return true if LinkedList contains, false if not
+	 */
 	public boolean contains(E value) {
 		Entry<E> current = head;
 
@@ -179,10 +237,20 @@ public class LinkedListCstmAddPos<E> {
 		}
 		return false;
 	}
+	
+	/**
+	 * Method clears LinkedList
+	 */
+	public void clear() {
+		head = null;
+		tail = null;
+		size = 0;
+	}
 
 	/**
 	 * Class of node (special entity) for adding and removing into LinkedList
 	 */
+	@SuppressWarnings("hiding")
 	private class Entry<E> {
 		E element;
 		Entry<E> next;

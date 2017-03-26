@@ -101,8 +101,8 @@ public class RunLinkedListCSTM {
 		myList.remove("A");
 		myList.remove("B");
 		myList.remove("C");
-		myList.remove("D");
 		myList.remove("E");
+		myList.clear();
 		System.out.println("size = " + myList.getSize());
 		myList.printListValues();
 	}
