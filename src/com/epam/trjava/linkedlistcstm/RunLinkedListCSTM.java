@@ -2,101 +2,42 @@ package com.epam.trjava.linkedlistcstm;
 
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAddPos;
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAnyAdd;
+import com.epam.trjava.linkedlistcstm.logic.LinkedListOperations;
 
 public class RunLinkedListCSTM {
 
 	public static void main(String[] args) {
-		//linkedListAnyPosition1();
-		//linkedListAnyPosition2();
-		//linkedListAnyPosition3();
-		linkedListAnyPosition4();
+		linkedListAnyPosition();
 		//linkedListAnyAdd();
 	}
 
-	public static void linkedListAnyPosition1() {
+	public static void linkedListAnyPosition() {
 
-		System.out.println("--- Testing 1 ----");
+		System.out.println("--- Testing ----");
 		LinkedListCstmAddPos<String> myList = new LinkedListCstmAddPos<String>();
-		myList.addFirst("B");
+		myList.addLast("Last 1");
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addMiddle("D");
+		LinkedListOperations.printListValues(myList);
+		myList.addLast("Last 2");
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addMiddle("C");
+		LinkedListOperations.printListValues(myList);
+		myList.addFirst("First 1");
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addLast("E");
+		LinkedListOperations.printListValues(myList);
+		myList.addFirst("First 2");
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addFirst("A");
+		LinkedListOperations.printListValues(myList);
+		myList.addFirst("First 3");
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-
-	}
-
-	public static void linkedListAnyPosition2() {
-
-		System.out.println("--- Testing 2 ----");
-		LinkedListCstmAddPos<String> myList = new LinkedListCstmAddPos<String>();
-		myList.addFirst("E");
+		LinkedListOperations.printListValues(myList);
+		myList.addInPosition("Postition 1", 3);
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addFirst("D");
+		LinkedListOperations.printListValues(myList);
+		myList.addInPosition("Position 2", 3);
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addFirst("C");
+		myList.addInPosition("Position 3", myList.getSize());
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addFirst("B");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addFirst("A");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-	}
-
-	public static void linkedListAnyPosition3() {
-
-		System.out.println("--- Testing 3 ----");
-		LinkedListCstmAddPos<String> myList = new LinkedListCstmAddPos<String>();
-		myList.addLast("A");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addLast("B");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addLast("C");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addLast("D");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addLast("E");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-
-	}
-
-	public static void linkedListAnyPosition4() {
-
-		System.out.println("--- Testing 4 ----");
-		LinkedListCstmAddPos<String> myList = new LinkedListCstmAddPos<String>();
-		myList.addLast("B");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addLast("E");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addFirst("A");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addMiddle("C");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addMiddle("D");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
+		LinkedListOperations.printListValues(myList);
 		System.out.println(myList.contains("B"));
 		myList.remove("A");
 		myList.remove("B");
@@ -104,7 +45,7 @@ public class RunLinkedListCSTM {
 		myList.remove("E");
 		myList.clear();
 		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
+		LinkedListOperations.printListValues(myList);
 	}
 
 	public static void linkedListAnyAdd() {

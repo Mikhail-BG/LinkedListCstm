@@ -32,18 +32,140 @@ public class LinkedListCstmAddPos<E> {
 	public LinkedListCstmAddPos() {
 	}
 
-	/**
-	 * Method for printing elements of LinkedList
-	 */
-	public void printListValues() {
+	public Entry<E> getFirst() {
+		return head;
+	}
 
-		Entry<E> temp = new Entry<E>();
-		temp = head;
-		while (temp != null) {
-			System.out.println(temp.element);
-			temp = temp.next;
+	/**
+	 * Method inserts element at the first position
+	 */
+	public void addFirst(E value) {
+		setCurrentLocation(0);
+		insertAtLocation(value);
+	}
+
+	/**
+	 * Method inserts element at the last position. If LinkedList is empty the
+	 * method addFirst works.
+	 */
+	public void addLast(E value) {
+		if (0 == size) {
+			addFirst(value);
+			return;
+		} else
+			setCurrentLocation(size);
+		insertAtLocation(value);
+	}
+
+	/**
+	 * Method inserts element at the middle. If LinkedList is empty the method
+	 * addFirst works. If this is the second iteration, addLast works.
+	 */
+	public void addInPosition(E value, int index) {
+		int i = index;
+		if (0 == size) {
+			addFirst(value);
+			return;
 		}
-		System.out.println("----");
+		if (i == size || 1 == size) {
+			addLast(value);
+			return;
+		}
+		setCurrentLocation(i-1);
+		insertAtLocation(value);
+	}
+
+	/**
+	 * Method removes the node by the value from LinkedList. Mission: 1: List is
+	 * empty, do nothing; 2: One removable node, set previous = null 3: some of
+	 * removable nodes: 3a: removable node is the first; 3b: removable node in
+	 * the middle or in the end of the list.
+	 * 
+	 * @param value
+	 *            Object to remove from LinkedList
+	 */
+	public boolean remove(E value) {
+
+		Entry<E> previous = null;
+
+		// step 1: head check if LinkedList is empty
+		Entry<E> current = head;
+
+		while (null != current) {
+
+			// Removable node is in the LinkedList
+			if (current.element.equals(value)) {
+
+				// step 3b: Removable node is in the middle or in the end of
+				// LinkedList
+				if (previous != null) {
+
+					// Removable node in the middle of the LinkedList
+					previous.next = current.next;
+
+					// Removable node in the end of LinkedList (change tail)
+					if (null == current.next) {
+						tail = previous;
+					}
+				} else {
+
+					// step 2 or 3a: One element in Linked List (previous =
+					// null) or removable node is first
+					head = head.next;
+
+					// List is empty now?
+					if (null == head) {
+						tail = null;
+					}
+				}
+				size--;
+				return true;
+			}
+			previous = current;
+			current = current.next;
+		}
+		return false;
+	}
+
+	/**
+	 * Method return the size of LinkedList
+	 * 
+	 * @return number of elements
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	public boolean isEmpty() {
+		return (0 == size);
+	}
+
+	/**
+	 * Method checks if LinkedList contains the value
+	 * 
+	 * @param value
+	 *            Object for checking
+	 * @return true if LinkedList contains, false if not
+	 */
+	public boolean contains(E value) {
+		Entry<E> current = head;
+
+		while (null != current) {
+			if (current.element.equals(value)) {
+				return true;
+			}
+			current = current.next;
+		}
+		return false;
+	}
+
+	/**
+	 * Method clears LinkedList
+	 */
+	public void clear() {
+		head = null;
+		tail = null;
+		size = 0;
 	}
 
 	/**
@@ -104,7 +226,7 @@ public class LinkedListCstmAddPos<E> {
 		}
 
 		// 4. middle element before tail
-		if (current_index == 1 && size == 3) {
+		if (current_index == size - 1) {
 			node.next = tail;
 			head.next = node;
 			tail.next = null;
@@ -120,143 +242,13 @@ public class LinkedListCstmAddPos<E> {
 	}
 
 	/**
-	 * Method inserts element at the first position
-	 */
-	public void addFirst(E value) {
-		setCurrentLocation(0);
-		insertAtLocation(value);
-	}
-
-	/**
-	 * Method inserts element at the last position. If LinkedList is empty the
-	 * method addFirst works.
-	 */
-	public void addLast(E value) {
-		if (0 == size) {
-			addFirst(value);
-			return;
-		} else
-			setCurrentLocation(size);
-		insertAtLocation(value);
-	}
-
-	/**
-	 * Method inserts element at the middle. If LinkedList is empty the method
-	 * addFirst works. If this is the second iteration, addLast works.
-	 */
-	public void addMiddle(E value) {
-		int i = size / 2;
-		if (0 == size) {
-			addFirst(value);
-			return;
-		}
-		if (i == size || 1 == size) {
-			addLast(value);
-			return;
-		}
-		setCurrentLocation(i);
-		insertAtLocation(value);
-	}
-
-	/**
-	 * Method return the size of LinkedList
-	 * 
-	 * @return number of elements
-	 */
-	public int getSize() {
-		return size;
-	}
-
-	/**
-	 * Method removes the node by the value from LinkedList. Mission: 1: List is
-	 * empty, do nothing; 2: One removable node, set previous = null 3: some of
-	 * removable nodes: 3a: removable node is the first; 3b: removable node in
-	 * the middle or in the end of the list.
-	 * 
-	 * @param value
-	 *            Object to remove from LinkedList
-	 */
-	public boolean remove(E value) {
-
-		Entry<E> previous = null;
-
-		// step 1: head check if LinkedList is empty
-		Entry<E> current = head;
-
-		while (null != current) {
-
-			// Removable node is in the LinkedList
-			if (current.element.equals(value)) {
-
-				// step 3b: Removable node is in the middle or in the end of
-				// LinkedList
-				if (previous != null) {
-
-					// Removable node in the middle of the LinkedList
-					previous.next = current.next;
-
-					// Removable node in the end of LinkedList (change tail)
-					if (null == current.next) {
-						tail = previous;
-					}
-				} else {
-
-					// step 2 or 3a: One element in Linked List (previous =
-					// null) or removable node is first
-					head = head.next;
-
-					// List is empty now?
-					if (null == head) {
-						tail = null;
-					}
-				}
-				size--;
-				return true;
-			}
-			previous = current;
-			current = current.next;
-		}
-		return false;
-	}
-
-	/**
-	 * Method checks if LinkedList contains the value
-	 * 
-	 * @param value
-	 *            Object for checking
-	 * @return true if LinkedList contains, false if not
-	 */
-	public boolean contains(E value) {
-		Entry<E> current = head;
-
-		while (null != current) {
-			if (current.element.equals(value)) {
-				return true;
-			}
-			current = current.next;
-		}
-		return false;
-	}
-	
-	/**
-	 * Method clears LinkedList
-	 */
-	public void clear() {
-		head = null;
-		tail = null;
-		size = 0;
-	}
-
-	/**
 	 * Class of node (special entity) for adding and removing into LinkedList
 	 */
-	@SuppressWarnings("hiding")
-	private class Entry<E> {
-		E element;
-		Entry<E> next;
+	static class Entry<T> {
+		T element;
+		Entry<T> next;
 
 		Entry() {
 		}
 	}
-
 }

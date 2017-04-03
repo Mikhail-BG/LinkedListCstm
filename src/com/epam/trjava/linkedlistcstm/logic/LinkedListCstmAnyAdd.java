@@ -237,7 +237,6 @@ public class LinkedListCstmAnyAdd<E> {
 	/**
 	 * Class of node (special entity) for adding and removing into LinkedList
 	 */
-	@SuppressWarnings("hiding")
 	private class Entry<E> {
 		E element;
 		Entry<E> next;
