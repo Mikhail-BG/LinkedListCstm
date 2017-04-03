@@ -32,6 +32,11 @@ public class LinkedListCstmAddPos<E> {
 	public LinkedListCstmAddPos() {
 	}
 
+	/**
+	 * Method returns the First element of LinkedList
+	 * 
+	 * @return head of the LinkedList
+	 */
 	public Entry<E> getFirst() {
 		return head;
 	}
@@ -136,6 +141,11 @@ public class LinkedListCstmAddPos<E> {
 		return size;
 	}
 
+	/**
+	 * Method returns false if LinkedList is empty
+	 * 
+	 * @returns false if empty, true if not
+	 */
 	public boolean isEmpty() {
 		return (0 == size);
 	}
