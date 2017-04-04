@@ -2,13 +2,11 @@ package com.epam.trjava.linkedlistcstm;
 
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAddPos;
 import com.epam.trjava.linkedlistcstm.logic.LinkedListOperations;
-import com.epam.trjava.linkedlistcstm.logic.deprecated.LinkedListCstmAnyAdd;
 
 public class RunLinkedListCSTM {
 
 	public static void main(String[] args) {
 		linkedListAnyPosition();
-		//linkedListAnyAdd();
 	}
 
 	public static void linkedListAnyPosition() {
