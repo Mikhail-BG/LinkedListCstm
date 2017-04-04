@@ -67,17 +67,19 @@ public class LinkedListCstmAddPos<E> {
 	 * addFirst works. If this is the second iteration, addLast works.
 	 */
 	public void addInPosition(E value, int index) {
-		int i = index;
-		if (0 == size) {
-			addFirst(value);
-			return;
+		if (isIndexValid(index)) {
+			int i = index;
+			if (0 == size) {
+				addFirst(value);
+				return;
+			}
+			if (i == size || 1 == size) {
+				addLast(value);
+				return;
+			}
+			setCurrentLocation(i - 1);
+			insertAtLocation(value);
 		}
-		if (i == size || 1 == size) {
-			addLast(value);
-			return;
-		}
-		setCurrentLocation(i-1);
-		insertAtLocation(value);
 	}
 
 	/**
@@ -179,16 +181,43 @@ public class LinkedListCstmAddPos<E> {
 	}
 
 	/**
+	 * Method return the value of the node in LinkedList
+	 * 
+	 * @param index
+	 *            - number of element in the LinkedList
+	 * 
+	 * @return the value of certain node
+	 */
+	public E getNodeByIndex(int index) {
+		if (isIndexValid(index)) {
+			setCurrentLocation(index);
+			return current.element;
+		}
+		return null;
+	}
+
+	/**
+	 * Method check if index is valid
+	 * 
+	 * @param index
+	 *            - number of element in the LinkedList
+	 * 
+	 * @return true if element with certain index exists, false if not
+	 */
+	private boolean isIndexValid(int index) {
+		if (index < 0 || index >= size) {
+			System.err.println("Index out of bounds");
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Auxiliary method defines current position and index into LinkedList,
 	 * method sets current_index and current as element after which will be
 	 * added new element
 	 */
 	private void setCurrentLocation(int index) {
-		if (index > size | index < 0) {
-			System.out.println("Exception: index out of bounds");
-			return;
-		}
-
 		for (int i = 0; i <= index; i++) {
 			if (0 == i) {
 				current = head;

@@ -2,7 +2,7 @@ package com.epam.trjava.linkedlistcstm.logic;
 
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAddPos.Entry;
 
-public class LinkedListOperations {
+public final class LinkedListOperations {
 	
 	private LinkedListOperations(){}
 	
@@ -18,5 +18,4 @@ public class LinkedListOperations {
 		}
 		System.out.println("----");
 	}
-
 }

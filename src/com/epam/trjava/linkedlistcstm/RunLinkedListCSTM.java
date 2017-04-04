@@ -1,8 +1,8 @@
 package com.epam.trjava.linkedlistcstm;
 
 import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAddPos;
-import com.epam.trjava.linkedlistcstm.logic.LinkedListCstmAnyAdd;
 import com.epam.trjava.linkedlistcstm.logic.LinkedListOperations;
+import com.epam.trjava.linkedlistcstm.logic.deprecated.LinkedListCstmAnyAdd;
 
 public class RunLinkedListCSTM {
 
@@ -18,54 +18,55 @@ public class RunLinkedListCSTM {
 		myList.addLast("Last 1");
 		System.out.println("size = " + myList.getSize());
 		LinkedListOperations.printListValues(myList);
+		
 		myList.addLast("Last 2");
 		System.out.println("size = " + myList.getSize());
 		LinkedListOperations.printListValues(myList);
-		myList.addFirst("First 1");
-		System.out.println("size = " + myList.getSize());
-		LinkedListOperations.printListValues(myList);
-		myList.addFirst("First 2");
-		System.out.println("size = " + myList.getSize());
-		LinkedListOperations.printListValues(myList);
+		
 		myList.addFirst("First 3");
 		System.out.println("size = " + myList.getSize());
 		LinkedListOperations.printListValues(myList);
-		myList.addInPosition("Postition 1", 3);
+		
+		myList.addFirst("First 2");
 		System.out.println("size = " + myList.getSize());
 		LinkedListOperations.printListValues(myList);
-		myList.addInPosition("Position 2", 3);
-		System.out.println("size = " + myList.getSize());
-		myList.addInPosition("Position 3", myList.getSize());
+		
+		myList.addFirst("First 1");
 		System.out.println("size = " + myList.getSize());
 		LinkedListOperations.printListValues(myList);
+		
+		myList.addInPosition("Postition 1", 1);
+		System.out.println("size = " + myList.getSize());
+		LinkedListOperations.printListValues(myList);
+		
+		myList.addInPosition("Position 2", 2);
+		System.out.println("size = " + myList.getSize());
+		LinkedListOperations.printListValues(myList);
+		
+		myList.addLast("Last 3");
+		System.out.println("size = " + myList.getSize());
+		LinkedListOperations.printListValues(myList);
+		
+		myList.addInPosition("Position last", myList.getSize()-1);
+		System.out.println("size = " + myList.getSize());
+		LinkedListOperations.printListValues(myList);
+		
 		System.out.println(myList.contains("B"));
-		myList.remove("A");
-		myList.remove("B");
-		myList.remove("C");
-		myList.remove("E");
+		
+		myList.remove("Last 3");
+		myList.remove("Position 2");
+		System.out.println("size = " + myList.getSize());
+		LinkedListOperations.printListValues(myList);
+		
+		for (int i = 0; i < myList.getSize(); i++){
+			System.out.println("Node at the position [" + i + "] : " + myList.getNodeByIndex(i));
+		}
+		
+		System.out.println("---");
+		
 		myList.clear();
 		System.out.println("size = " + myList.getSize());
 		LinkedListOperations.printListValues(myList);
-	}
-
-	public static void linkedListAnyAdd() {
-		System.out.println("--- Testing ----");
-		LinkedListCstmAnyAdd<String> myList = new LinkedListCstmAnyAdd<String>();
-		myList.addLast("A");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addMiddle("B");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addMiddle("C");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.addLast("D");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
-		myList.remove("B");
-		System.out.println("size = " + myList.getSize());
-		myList.printListValues();
 	}
 
 }

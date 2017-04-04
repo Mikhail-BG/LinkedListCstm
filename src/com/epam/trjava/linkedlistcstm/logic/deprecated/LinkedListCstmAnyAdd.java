@@ -1,4 +1,4 @@
-package com.epam.trjava.linkedlistcstm.logic;
+package com.epam.trjava.linkedlistcstm.logic.deprecated;
 
 /**
  * Class implements realization of Simply Linked List with the possibility to
