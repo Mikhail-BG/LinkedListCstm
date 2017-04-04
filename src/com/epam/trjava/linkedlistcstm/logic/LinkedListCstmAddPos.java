@@ -68,16 +68,15 @@ public class LinkedListCstmAddPos<E> {
 	 */
 	public void addInPosition(E value, int index) {
 		if (isIndexValid(index)) {
-			int i = index;
 			if (0 == size) {
 				addFirst(value);
 				return;
 			}
-			if (i == size || 1 == size) {
+			if (index == size || 1 == size) {
 				addLast(value);
 				return;
 			}
-			setCurrentLocation(i - 1);
+			setCurrentLocation(index - 1);
 			insertAtLocation(value);
 		}
 	}
